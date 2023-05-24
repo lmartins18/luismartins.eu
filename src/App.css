@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 #root {
-  @apply flex flex-col h-screen w-screen text-black
+  @apply flex flex-col h-screen w-screen text-black dark:text-white
 }
+

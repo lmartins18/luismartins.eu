@@ -1,8 +1,39 @@
+import { useRef, useContext, useCallback, useEffect, useState } from "react";
+import { ThemeContext } from "../contexts/theme-context";
+import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { RxHamburgerMenu } from "react-icons/rx";
+
 export const Header = () => {
+  const [toggleNav, setToggleNav] = useState<boolean>(false);
+  const darkTheme = useRef<boolean>();
+  const { currentTheme, changeCurrentTheme } = useContext(ThemeContext);
+  const changeToggle = useCallback(() => {
+    setToggleNav(!toggleNav);
+  }, [toggleNav]);
+  function changeTheme() {
+    changeCurrentTheme(currentTheme === "light" ? "dark" : "light");
+    darkTheme.current = !darkTheme.current;
+    localStorage.setItem("theme", darkTheme.current ? "dark" : "light");
+  }
+  useEffect(() => {
+    // Dark mode
+    darkTheme.current = localStorage.getItem("theme") === "dark";
+    changeCurrentTheme(darkTheme.current ? "dark" : "light");
+    // Fechar NavMenu quando utilizador clicka fora da nav.
+    document.addEventListener("click", (e) => {
+      if (toggleNav) {
+        const target = e.target;
+        const navMenu = document.getElementById("navmenu")!;
+        if (navMenu && !navMenu.contains(target as Node)) {
+          changeToggle();
+        }
+      }
+    });
+  }, [toggleNav]);
   return (
     <>
       <header aria-label="Site Header" className="bg-white dark:bg-gray-900">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
               <a className="block text-teal-600 dark:text-teal-600" href="/">
@@ -23,7 +54,7 @@ export const Header = () => {
 
             <div className="hidden md:block">
               <nav aria-label="Site Nav">
-                <ul className="flex items-center gap-6 text-sm">
+                <ul className="flex items-center gap-6 text-sm md:flex-col">
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
@@ -83,6 +114,25 @@ export const Header = () => {
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
+                <button
+                  id="theme-toggle"
+                  title="toggle-dark-mode-button"
+                  type="button"
+                  className="text-gray-500 hover:text-orange-400 focus:outline-none rounded-lg text-sm p-2.5 mr-1"
+                  onClick={changeTheme}
+                >
+                  {darkTheme.current ? (
+                    <BsFillMoonStarsFill
+                      id="theme-toggle-light-icon"
+                      className={"w-5 h-5"}
+                    />
+                  ) : (
+                    <BsFillSunFill
+                      id="theme-toggle-dark-icon"
+                      className="w-5 h-5"
+                    />
+                  )}
+                </button>
                 <a
                   className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"
                   href="/"
@@ -104,21 +154,9 @@ export const Header = () => {
                 <button
                   title="btn"
                   className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  onClick={changeToggle}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
+                  <RxHamburgerMenu />
                 </button>
               </div>
             </div>
