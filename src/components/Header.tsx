@@ -1,4 +1,11 @@
-import { useRef, useContext, useCallback, useEffect, useState } from "react";
+import {
+  useRef,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { ThemeContext } from "../contexts/theme-context";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -41,6 +48,32 @@ export const Header = () => {
       </a>
     </li>
   );
+  // TODO fix this
+  const NavBarButton = ({
+    title,
+    href,
+    onClick,
+    icon,
+  }: {
+    title: string;
+    href?: string;
+    onClick?: () => void;
+    icon: ReactNode;
+  }) => (
+    <button
+      title={title}
+      name={title}
+      className="outline-none border-none rounded-lg bg-transparent"
+      onClick={onClick}
+    >
+      <a
+        href={href}
+        className="text-cyan-600 dark:text-red-600 bg-transparent text-2xl"
+      >
+        {icon}
+      </a>
+    </button>
+  );
   return (
     <>
       <header aria-label="Site Header" className="bg-white dark:bg-gray-900">
@@ -70,47 +103,31 @@ export const Header = () => {
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <button
-                  title="github"
-                  name="github"
-                  className="outline-none border-none rounded-lg bg-transparent"
-                >
-                  <a
-                    href="https://github.com/lmartins18"
-                    className="text-cyan-600 dark:text-red-600 bg-transparent text-2xl"
-                  >
-                    <AiFillGithub />
-                  </a>
-                </button>
-                {/* todo dry this */}
-                <button
-                  title="github"
-                  name="github"
-                  className="outline-none border-none rounded-lg bg-transparent"
-                >
-                  <a
-                    href="https://www.linkedin.com/in/luis-martinsie/"
-                    className="text-cyan-600 dark:text-red-600 bg-transparent text-2xl"
-                  >
-                    <AiFillLinkedin />
-                  </a>
-                </button>
+                <NavBarButton
+                  title={"github"}
+                  href={"https://github.com/lmartins18"}
+                  icon={<AiFillGithub />}
+                />
 
-                <button
-                  id="theme-toggle"
-                  title="toggle-dark-mode-button"
-                  type="button"
-                  className="outline-none border-none rounded-lg text-sm p-2.5 mr-1"
+                {/* todo dry this */}
+                <NavBarButton
+                  title={"github"}
+                  href="https://www.linkedin.com/in/luis-martinsie/"
+                  icon={<AiFillLinkedin />}
+                />
+                <NavBarButton
+                  title={"github"}
                   onClick={changeTheme}
-                >
-                  <a className="text-cyan-600 dark:text-red-600 text-xl">
-                    {darkTheme.current ? (
-                      <BsFillMoonStarsFill id="theme-toggle-light-icon" />
-                    ) : (
-                      <BsFillSunFill id="theme-toggle-dark-icon" />
-                    )}
-                  </a>
-                </button>
+                  icon={
+                    <>
+                      {darkTheme.current ? (
+                        <BsFillMoonStarsFill id="theme-toggle-light-icon" />
+                      ) : (
+                        <BsFillSunFill id="theme-toggle-dark-icon" />
+                      )}
+                    </>
+                  }
+                />
               </div>
 
               <div className="block md:hidden">
