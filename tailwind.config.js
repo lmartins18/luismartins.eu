@@ -6,7 +6,14 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    fontFamily: {
+      'monoton': ['Monoton', 'Cursive'],
+    },
+    extend: {
+      animation: {
+        aurora: 'aurora 7s ease-in infinite',
+      }
+    },
   },
   plugins: [],
   
