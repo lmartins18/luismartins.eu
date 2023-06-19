@@ -1,13 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import { Header } from "./components/Header";
-import { MainBody } from "./components/MainBody";
+import { AppRoutes } from "./components/AppRoutes";
 import { ThemeContextProvider } from "./contexts/theme-context/ThemeContextProvider";
 
 function App() {
   return (
     <ThemeContextProvider>
-      <Header />
-      <MainBody />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </ThemeContextProvider>
   );
 }
