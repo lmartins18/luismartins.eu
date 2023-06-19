@@ -1,16 +1,17 @@
-import bg from "../img/wtv.png";
+import photo from "../img/rostu.png";
 
 export const About = () => (
   <div className="p-12 overflow-scroll">
     <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
       <div className="lg:pl-20 m-auto sm:mr-0">
-        <div className="max-w-xs px-2.5 lg:max-w-none">
+        <div className="max-w-xs px-2.5 lg:max-w-none"> 
           <img
-            title="wtv"
+            title="profile-pic"
+            alt="my photo"
             loading="lazy"
             className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800 w-[22rem] ring-8 ring-white  sm:m-8"
             sizes="(min-width: 1024px) 32rem, 20rem"
-            src={bg}
+            src={photo}
           />
         </div>
       </div>
@@ -51,7 +52,7 @@ export const About = () => (
       <div className="mt-2 border-t border-zinc-100 pt-8 dark:border-zinc-700/40 flex justify-end ml-12">
         <a
           className="group flex text-sm font-medium text-zinc-800 transition hover:text-cyan-600 dark:text-zinc-200 dark:hover:text-red-500"
-          href="mailto:luis.martin0@icloud.com"
+          href="mailto:luis.martins0@icloud.com"
         >
           <svg
             viewBox="0 0 24 24"
@@ -63,7 +64,7 @@ export const About = () => (
               d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
             ></path>
           </svg>
-          <span className="ml-4">luis.martin0@icloud.com</span>
+          <span className="ml-4">luis.martins0@icloud.com</span>
         </a>
       </div>
     </div>

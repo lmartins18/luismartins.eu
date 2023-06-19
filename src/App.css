@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Monoton-Regular';
+  src: local('Monoton-Regular'), url(./fonts/Monoton-Regular.ttf) format('truetype');
+}
 
 #root {
   @apply flex flex-col h-screen w-screen text-black dark:text-white;

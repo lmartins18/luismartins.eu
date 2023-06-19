@@ -5,16 +5,17 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Disclosure } from "@headlessui/react";
 import * as classNames from "classnames";
 import { SocialLinks } from "./SocialLinks";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const location = useLocation().pathname;
+  const navigate = useNavigate();
   // TODO dry this shit
   const navigation = [
     { name: "About", href: "/about", current: location === "/about" },
-    { name: "Team", href: "#", current: location === "#" },
+    { name: "Experience", href: "/experience", current: location === "/experience" },
     { name: "Projects", href: "#", current: location === "#" },
-    { name: "Calendar", href: "#", current: location === "#" },
+    { name: "Uses", href: "/uses", current: location === "/uses" },
   ];
   const [toggleNav, setToggleNav] = useState<boolean>(false);
 
@@ -37,7 +38,7 @@ export const Header = () => {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-10">
         {({ open }) => (
           <>
             <div className="mx-auto px-2 sm:px-6 lg:px-8">
@@ -57,8 +58,11 @@ export const Header = () => {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 w-full items-center justify-between  sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center ml-12 sm:ml-0">
-                    <a href="/" className="block bg-gradient-to-r dark:from-black dark:via-red-500 dark:to-black from-white via-cyan-500 to-white bg-clip-text bg-[length:350%] font-monoton text-3xl text-transparent animate-aurora mr-auto">
+                  <div className="flex flex-shrink-0 items-center m-auto sm:m-0 ">
+                    <a
+                      onClick={() => navigate("/")}
+                      className="cursor-pointer block bg-gradient-to-r dark:from-black dark:via-red-500 dark:to-black from-white via-cyan-500 to-white bg-clip-text bg-[length:350%] font-monoton text-3xl text-transparent animate-aurora mr-auto"
+                    >
                       Luis Martins
                     </a>
                   </div>
@@ -67,12 +71,12 @@ export const Header = () => {
                       {navigation.map((item) => (
                         <a
                           key={item.name}
-                          href={item.href}
+                          onClick={() => navigate(item.href)}
                           className={classNames(
                             item.current
                               ? "border-b-cyan-300 dark:border-b-red-600 text-white"
                               : "text-gray-300 hover:border-b-cyan-600 dark:hover:border-b-red-900 hover:text-white",
-                            "border-4 border-transparent block  px-3 py-4 text-base font-medium"
+                            "border-4 border-transparent block  px-3 py-4 text-base font-medium cursor-pointer"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
